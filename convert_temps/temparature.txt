@@ -1,0 +1,115 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="Generator" content="EditPlus®">
+<meta name="Author" content="">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<title>Document</title>
+</head>
+<body>
+   <script>
+       window.onload = function() {
+           clearTextBoxes();
+           $("to_celsius").checked = true;
+           $("to_fahrenheit").checked = false;
+           $("tempratureLabel1").value = "Enter F degrees";
+           $("tempratureLabel2").value = "Degree Celsisus";
+           $("convert").onclick = convertTemp;
+           $("to_celsius").onclick = toCelsius;
+           $("to_fahrenheit").onclick = toFahrenheit;
+           $("degrees_entered").focus();
+       };
+
+       var $ = function(id) {
+           return document.getElementById(id);
+       };
+
+       function clearTextBoxes() {
+           $("degrees_entered").value = "";
+           $("degrees_computed").value = "";
+
+       }
+       function toFahrenheit() {
+           clearTextBoxes();
+           $("tempratureLabel1").value = "Enter C degrees";
+           $("tempratureLabel2").value = "Degree Fahrenheit";
+           $("to_celsius").checked = false;
+       }
+
+       function toCelsius() {
+           $("to_fahrenheit").checked = false;
+           $("tempratureLabel1").value = "Enter F degrees";
+           $("tempratureLabel2").value = "Degree Celsisus";
+           clearTextBoxes();
+
+       }
+
+       function convertTemp() {
+           var number = $("degrees_entered").value;
+           if (number == '' || isNaN(number)) {
+               alert("You must enter a valid number for degrees.");
+           } else {
+               if ($("to_celsius").checked) {
+                   var fTemparture = $("degrees_entered").value;
+                   fTemparture = fTemparture - 32;
+                   fTemparture = fTemparture * 5 / 9;
+                   $("degrees_computed").value = Math.round(fTemparture);
+                   $("degrees_computed").focus();
+
+               } else if ($("to_fahrenheit").checked) {
+                   var cTemparture = $("degrees_entered").value;
+                   cTemparture = cTemparture * 9 / 5;
+                   cTemparture = cTemparture + 32;
+                   $("degrees_computed").value = Math.round(cTemparture);
+                   $("degrees_computed").focus();
+               }
+           }
+       }
+   </script>
+   <div align="center" style="vertical-align: bottom">
+       <div align="center" style="vertical-align: bottom">
+
+           <table align="center" border="1">
+               <th align="center"><font size="6" color="blue">Convert
+                       temperatures</font></th>
+               <tr>
+                   <td>
+                       <table align="left" id="radioTable">
+                           <tr>
+                               <TD><input type="radio" id="to_celsius" name="to_celsius"
+                                   value="" checked> Fahrenheit to Celsisus</TD>
+                           </tr>
+                           <tr>
+                               <TD><input type="radio" id="to_fahrenheit"
+                                   name="to_fahrenheit" value=""> Celsisus to Fahrenheit</TD>
+                           </tr>
+                       </table>
+                   </td>
+               <tr>
+                   <td>
+                       <table align="center" id="inputTable">
+                           <TR>
+                               <TD><input type="label" id="tempratureLabel1"
+                                   name="tempratureLabe1" value="Enter F degrees"></TD>
+                               <TD><input type="text" id="degrees_entered"
+                                   "name="degrees_entered" value="" checked></TD>
+                           </TR>
+                           <TR>
+                               <TD><input type="label" id="tempratureLabel2"
+                                   name="tempratureLabel2" value="Degree Celsisus"></TD>
+                               <TD><input type="text" id="degrees_computed"
+                                   name="degrees_computed" value=""></TD>
+                           </TR>
+                           <TR>
+                               <TD>&nbsp;</TD>
+                               <TD><input type="submit" id="convert" name="convert"
+                                   value="convert" onclick="convertTemp();"></TD>
+                           </TR>
+                       </table>
+                   </td>
+               </tr>
+               </div>
+               </div>
+</body>
+</html>
